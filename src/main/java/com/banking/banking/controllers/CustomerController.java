@@ -1,0 +1,29 @@
+package com.banking.banking.controllers;
+
+import com.banking.banking.dto.CustomerDTO;
+import com.banking.banking.entities.Customer;
+import com.banking.banking.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+public class CustomerController {
+
+    @Autowired
+    CustomerService customerService;
+
+    @PostMapping("/customerOnboarding")
+    public ResponseEntity<Map<Customer,String>> newCustomer(@RequestBody Customer newObj){
+        return customerService.createNewCustomer(newObj);
+    }
+
+    @GetMapping("/allActiveUsers")
+    public List<Customer> findAllUsers(){
+        return customerService.getAllActiveUsers();
+    }
+
+}
