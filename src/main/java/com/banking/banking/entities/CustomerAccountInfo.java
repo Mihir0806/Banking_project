@@ -1,5 +1,6 @@
 package com.banking.banking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +17,14 @@ public class CustomerAccountInfo extends CommonDataModel{
         BRONZE,SILVER,GOLD,PLATINUM,BLACK
     }
 
+    public enum type{
+        SAVINGS,CURRENT
+    }
+
     @ManyToOne
-    private Customer customer;
+    @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
+    @JsonIgnore
+    private Customer custId;
 
     private String accountNumber;
 
@@ -34,6 +41,7 @@ public class CustomerAccountInfo extends CommonDataModel{
     @Enumerated(EnumType.STRING)
     private accountStatus accountStatus;
 
-    private String accountType;
+    @Enumerated(EnumType.STRING)
+    private type accountType;
 
 }

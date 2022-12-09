@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Set;
 
@@ -18,6 +19,7 @@ public class Customer extends CommonDataModel{
 
     @NotBlank
     @NotNull
+    @Column(name = "cust_id", unique = true)
     private String custId;
 
     @NotNull
@@ -44,13 +46,25 @@ public class Customer extends CommonDataModel{
 
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_details")
+    @OneToOne(optional=false,cascade = CascadeType.ALL )
+    @JoinColumn(name = "address_id")
     private AddressDetails addressDetails;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @Column(name = "customer_info")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
     private Set<CustomerAccountInfo> customerAccountInfo;
 
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "custId='" + custId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", email='" + email + '\'' +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                ", addressDetails=" + addressDetails +
+                ", customerAccountInfo=" + customerAccountInfo +
+                '}';
+    }
 }

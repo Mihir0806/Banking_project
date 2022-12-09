@@ -1,8 +1,7 @@
 package com.banking.banking.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -11,7 +10,8 @@ import lombok.Setter;
 @Setter
 public class AddressDetails extends CommonDataModel{
 
-    @OneToOne(mappedBy = "addressDetails")
+    @OneToOne(optional=false,mappedBy = "addressDetails")
+    @JsonIgnore
     private Customer customer;
     private String address;
     private String area;
