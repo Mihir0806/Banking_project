@@ -2,11 +2,9 @@ package com.banking.banking.entities;
 
 import com.banking.banking.enums.TransactionStatus;
 import com.banking.banking.enums.TransactionType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -16,20 +14,20 @@ import java.util.Date;
 @Table(name = "bm_transaction_details")
 @Getter
 @Setter
+@NoArgsConstructor
 public class TransactionDetails extends CommonDataModel{
 
-
-    private CustomerAccountInfo sourceAccount;
-
-    private CustomerAccountInfo targetAccount;
+    private String sourceAccount;
+    private String targetAccount;
 
     private String transactionId;
+
+    private String accountNumber;
 
     private String initiatedBy;
 
     @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
-
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
@@ -39,9 +37,26 @@ public class TransactionDetails extends CommonDataModel{
 
     private Date transactionTime;
 
-    TransactionDetails(CustomerAccountInfo source,CustomerAccountInfo target){
+    @Override
+    public String toString() {
+        return "TransactionDetails{" +
+                "sourceAccount='" + sourceAccount + '\'' +
+                ", targetAccount='" + targetAccount + '\'' +
+                ", transactionId='" + transactionId + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", initiatedBy='" + initiatedBy + '\'' +
+                ", transactionStatus=" + transactionStatus +
+                ", transactionType=" + transactionType +
+                ", amountDebited=" + amountDebited +
+                ", amountCredited=" + amountCredited +
+                ", transactionTime=" + transactionTime +
+                '}';
+    }
+
+    public TransactionDetails(String source, String target, TransactionType type){
         this.sourceAccount = source;
         this.targetAccount = target;
+        this.transactionType = type;
     }
 
 

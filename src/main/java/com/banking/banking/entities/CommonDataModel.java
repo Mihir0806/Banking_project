@@ -14,7 +14,7 @@ import java.util.Date;
 public class CommonDataModel {
 
     public enum activeStatus{
-        ACTIVE,INACTIVE
+        ACTIVE,INACTIVE,PENDING
     }
 
     @Id

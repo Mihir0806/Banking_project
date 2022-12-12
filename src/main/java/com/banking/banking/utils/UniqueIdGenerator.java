@@ -1,4 +1,4 @@
-package com.banking.banking.UTILS;
+package com.banking.banking.utils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class UniqueIdGenerator {
         System.out.println("Number of Unique IDs generated: " + uniqueIds.size() + " in " + (System.currentTimeMillis() - now) + " milliseconds");
     }
 
-    private static synchronized Long generateLongId() {
+    public static synchronized Long generateLongId() {
         long timestamp = System.currentTimeMillis();
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) % sequenceMax;

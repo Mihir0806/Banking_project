@@ -6,4 +6,6 @@ import com.banking.banking.entities.CustomerAccountInfo;
 public interface CustomerAccountInfoRepository extends CDMRepository<CustomerAccountInfo,String>{
 
     public CustomerAccountInfo findByAccountNumber(String accountNumber);
+
+    public boolean existsByAccountNumber(String accountNumber);
 }

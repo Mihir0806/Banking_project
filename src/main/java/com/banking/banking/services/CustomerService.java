@@ -2,6 +2,7 @@ package com.banking.banking.services;
 
 //import com.banking.banking.dto.CustomerDTO;
 import com.banking.banking.entities.AddressDetails;
+import com.banking.banking.entities.CommonDataModel;
 import com.banking.banking.entities.Customer;
 import com.banking.banking.entities.CustomerAccountInfo;
 import com.banking.banking.repositories.CustomerRepository;
@@ -111,6 +112,8 @@ public class CustomerService extends AbstractCDMService<Customer> {
             String id = customer.getCustId() +"-"+ obj.getAccountType().toString();
             obj.setCustId(customer);
             obj.setId(id);
+            //Make all accounts pending default.
+            obj.setActiveStatus(CommonDataModel.activeStatus.PENDING);
             updatedCustomerAccountInfo.add(obj);
         });
         return updatedCustomerAccountInfo;
