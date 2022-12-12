@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -75,6 +76,8 @@ public class TransactionDetailsService extends AbstractCDMService<TransactionDet
         cal.setTime(today);
         cal.add(Calendar.DAY_OF_MONTH,-n);
         Date nDaysBefore = cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+        sdf.format(nDaysBefore);
         List<TransactionDetails> transactionDetailsList =  repository.findByTransactionTimeBetween(accountNumber,nDaysBefore);
         TransactionDetails newTransaction = new TransactionDetails(accountNumber,accountNumber,TransactionType.INQUIRY);
         fillAttributes(newTransaction);
